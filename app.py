@@ -6,7 +6,7 @@ import datetime
 
 # --- 1. APP CONFIGURATION ---
 st.set_page_config(
-    page_title="Titan v31.0 | Omni Architect", 
+    page_title="Titan v32.0 | Master Merge", 
     layout="wide", 
     page_icon="⚡",
     initial_sidebar_state="expanded"
@@ -61,7 +61,7 @@ st.markdown("""
 # --- 3. SIDEBAR: THE CONTROL CENTER ---
 with st.sidebar:
     st.title("Titan Architect")
-    st.caption("v31.0 | Mobile Fix & SEO Restore")
+    st.caption("v32.0 | Master Merge")
     st.divider()
     
     # 3.1 VISUAL DNA
@@ -100,7 +100,7 @@ with st.sidebar:
         show_faq = st.checkbox("F.A.Q.", value=True)
         show_cta = st.checkbox("Final Call to Action", value=True)
 
-    # 3.3 TECHNICAL (RESTORED SEO KEYWORDS)
+    # 3.3 TECHNICAL (RESTORED ALL INPUTS)
     with st.expander("⚙️ SEO & Analytics", expanded=False):
         seo_keywords = st.text_area("SEO Keywords (Comma Separated)", "software house kolkata, script lab, custom python scripts, automation expert")
         gsc_tag = st.text_input("Google Verification ID")
@@ -119,9 +119,8 @@ with tabs[0]:
         biz_tagline = st.text_input("Tagline", "Premium Software & Scripting Solutions")
         biz_phone = st.text_input("Phone", "+966 57 256 2151")
         biz_email = st.text_input("Email (For Forms)", "hello@kaydiemscriptlab.com")
-        # RESTORED SERVICE AREA
-        biz_service_area = st.text_input("Service Area (e.g. Kolkata, West Bengal, Worldwide)", "Kolkata, West Bengal, Worldwide")
-        
+        # RESTORED: Service Area
+        biz_service_area = st.text_input("Service Area (e.g. Kolkata, Worldwide)", "Kolkata, West Bengal, Worldwide")
     with c2:
         prod_url = st.text_input("Website URL (Required for Sitemap)", "https://kaydiemscriptlab.com")
         biz_addr = st.text_area("Address", "Kanishka's House, Garia Station Rd, Kolkata, West Bengal 700084, India", height=100)
@@ -155,13 +154,13 @@ with tabs[1]:
     
     st.subheader("Trust Stats Data")
     col_s1, col_s2, col_s3 = st.columns(3)
-    stat_1 = col_s1.text_input("Stat 1", "10+")
+    stat_1 = col_s1.text_input("Stat 1 (e.g., Years)", "10+")
     label_1 = col_s1.text_input("Label 1", "Years Experience")
     
-    stat_2 = col_s2.text_input("Stat 2", "500+")
+    stat_2 = col_s2.text_input("Stat 2 (e.g., Clients)", "500+")
     label_2 = col_s2.text_input("Label 2", "Happy Clients")
     
-    stat_3 = col_s3.text_input("Stat 3", "100%")
+    stat_3 = col_s3.text_input("Stat 3 (e.g., Rating)", "100%")
     label_3 = col_s3.text_input("Label 3", "Satisfaction")
 
     st.divider()
@@ -174,6 +173,8 @@ with tabs[1]:
                              height=150)
     
     st.subheader("About Content")
+    st.info("💡 **Formatting Tip:** Wrap titles in double asterisks to make them bold. Example: `**Our Philosophy**`")
+    
     about_h = st.text_input("About Title", "The Future of Digital Architecture")
     about_img = st.text_input("About Side Image", "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1600")
     
@@ -189,6 +190,7 @@ with tabs[2]:
 
 with tabs[3]:
     st.subheader("Trust & Legal")
+    st.info("💡 Use `**Title**` for bold headers.")
     testi_data = st.text_area("Testimonials (Name | Quote)", "Arjun Mehta | The custom scripts from Kaydiem reduced our manual workload by 70%.\nJames Wilson | Clean code, high performance, and exceptional support.", height=100)
     
     faq_data = st.text_area("FAQ Data (Q? ? A)", "Do you provide custom scripts? ? Yes, tailored to your needs.\nIs the source code secure? ? We use bank-grade encryption.", height=100)
@@ -214,7 +216,7 @@ def format_text(text):
     return html_out
 
 def gen_schema():
-    # UPDATED: Added AreaServed
+    # RESTORED: areaServed included
     schema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -252,7 +254,6 @@ def get_theme_css():
     elif anim_type == "Zoom In":
         anim_css = ".reveal { opacity: 0; transform: scale(0.95); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); } .reveal.active { opacity: 1; transform: scale(1); }"
     
-    # Hero Carousel CSS
     hero_css = """
     .hero { position: relative; min-height: 90vh; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding-top: 80px; background-color: var(--p); }
     .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 0; }
@@ -319,12 +320,7 @@ def get_theme_css():
     .share-btn {{ width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: 0.3s; color: white; }}
     .share-btn:hover {{ transform: scale(1.1); filter: brightness(1.1); }}
     .share-btn svg {{ width: 20px; height: 20px; fill: currentColor; }}
-    
-    .share-wa {{ background: #25D366; }}
-    .share-fb {{ background: #1877F2; }}
-    .share-x {{ background: #000000; }}
-    .share-li {{ background: #0A66C2; }}
-    .share-cp {{ background: #64748b; }}
+    .share-wa {{ background: #25D366; }} .share-fb {{ background: #1877F2; }} .share-x {{ background: #000000; }} .share-li {{ background: #0A66C2; }} .share-cp {{ background: #64748b; }}
     
     .detail-view {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }}
     
@@ -333,7 +329,6 @@ def get_theme_css():
 
     {anim_css}
     
-    /* MOBILE OPTIMIZATIONS (AUDIT FIX) */
     @media (max-width: 768px) {{
         .nav-links {{ 
             position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); 
@@ -350,8 +345,8 @@ def get_theme_css():
         .about-grid {{ grid-template-columns: 1fr !important; gap: 2rem; text-align: left; }}
         .about-grid img {{ order: 2; margin-top: 1rem; }}
         .about-grid div {{ order: 1; }}
-
-        /* FIX: CONTACT FORM FOR MOBILE */
+        
+        /* RESTORED: Mobile Grid Fix */
         .contact-grid {{ grid-template-columns: 1fr !important; gap: 2rem !important; }}
     }}
     """
@@ -380,10 +375,8 @@ def gen_hero():
         <div class="carousel-slide active" style="background-image: url('{hero_img_1}')"></div>
         <div class="carousel-slide" style="background-image: url('{hero_img_2}')"></div>
         <div class="carousel-slide" style="background-image: url('{hero_img_3}')"></div>
-        
         <div class="container hero-content">
-            <h1>{hero_h}</h1>
-            <p>{hero_sub}</p>
+            <h1>{hero_h}</h1><p>{hero_sub}</p>
             <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
                 <a href="#inventory" class="btn btn-accent">Explore Now</a>
                 <a href="contact.html" class="btn" style="background:rgba(255,255,255,0.2); backdrop-filter:blur(10px); color:white;">Contact Us</a>
@@ -408,7 +401,7 @@ def get_simple_icon(name):
     if "heart" in name: return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
     if "code" in name: return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>'
     if "layers" in name: return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z"/></svg>'
-    if "database" in name: return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 2C6.48 2 2 4.02 2 6.5S6.48 11 12 11s10-2.02 10-4.5S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
+    if "database" in name: return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
     return '<svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
 
 def gen_features():
@@ -429,43 +422,34 @@ def gen_features():
     return f"""<section id="features"><div class="container"><div class="section-head reveal"><h2>{f_title}</h2></div><div class="grid-3">{cards}</div></div></section>"""
 
 def gen_stats():
-    return f"""
-    <div style="background:var(--p); color:white; padding:3rem 0; text-align:center;">
-        <div class="container grid-3">
-            <div class="reveal">
-                <h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_1}</h3>
-                <p style="color:rgba(255,255,255,0.8); margin:0;">{label_1}</p>
-            </div>
-            <div class="reveal">
-                <h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_2}</h3>
-                <p style="color:rgba(255,255,255,0.8); margin:0;">{label_2}</p>
-            </div>
-            <div class="reveal">
-                <h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_3}</h3>
-                <p style="color:rgba(255,255,255,0.8); margin:0;">{label_3}</p>
-            </div>
-        </div>
-    </div>
-    """
+    return f"""<div style="background:var(--p); color:white; padding:3rem 0; text-align:center;"><div class="container grid-3"><div class="reveal"><h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_1}</h3><p style="color:rgba(255,255,255,0.8); margin:0;">{label_1}</p></div><div class="reveal"><h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_2}</h3><p style="color:rgba(255,255,255,0.8); margin:0;">{label_2}</p></div><div class="reveal"><h3 style="color:#ffffff; margin:0; font-size:3rem;">{stat_3}</h3><p style="color:rgba(255,255,255,0.8); margin:0;">{label_3}</p></div></div></div>"""
 
+# --- RESTORED: SMART CSV PARSER ---
 def gen_csv_parser():
     return """
     <script>
-    function parseCSVLine(str) {
-        const res = [];
-        let cur = '';
+    function parseGlobalCSV(text) {
+        let results = [];
+        let row = [];
+        let current = "";
         let inQuote = false;
-        for (let i = 0; i < str.length; i++) {
-            const c = str[i];
+        for (let i = 0; i < text.length; i++) {
+            let c = text[i];
+            let next = text[i+1];
             if (c === '"') {
-                if (inQuote && str[i+1] === '"') { cur += '"'; i++; }
+                if (inQuote && next === '"') { current += '"'; i++; }
                 else { inQuote = !inQuote; }
             } else if (c === ',' && !inQuote) {
-                res.push(cur.trim()); cur = '';
-            } else { cur += c; }
+                row.push(current.trim()); current = "";
+            } else if ((c === '\\r' || c === '\\n') && !inQuote) {
+                if (current || row.length > 0) row.push(current.trim());
+                if (row.length > 0) results.push(row);
+                row = []; current = "";
+                if (c === '\\r' && next === '\\n') i++;
+            } else { current += c; }
         }
-        res.push(cur.trim());
-        return res;
+        if (current || row.length > 0) { row.push(current.trim()); results.push(row); }
+        return results;
     }
     </script>
     """
@@ -480,33 +464,30 @@ def gen_inventory_js(is_demo=False):
         try {{
             const res = await fetch('{sheet_url}');
             const txt = await res.text();
-            const lines = txt.split(/\\r\\n|\\n/);
+            const rows = parseGlobalCSV(txt);
             const box = document.getElementById('inv-grid');
             if(!box) return;
             box.innerHTML = '';
-            for(let i=1; i<lines.length; i++) {{
-                if(!lines[i].trim()) continue;
-                const clean = parseCSVLine(lines[i]);
+            for(let i=1; i<rows.length; i++) {{
+                const clean = rows[i];
+                if(clean.length < 2) continue;
                 let img = clean[3] && clean[3].length > 5 ? clean[3] : '{custom_feat}'; 
-                if(clean[6] && clean[6].length > 5) img = clean[6];
-                if(clean.length > 1) {{
-                    const prodName = encodeURIComponent(clean[0]);
-                    box.innerHTML += `
-                    <div class="card reveal">
-                        <img src="${{img}}" class="prod-img" onerror="this.onerror=null;this.src='{custom_feat}';">
-                        <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;">
-                            <div>
-                                <h3>${{clean[0]}}</h3>
-                                <p style="font-weight:bold; color:var(--s); font-size:1.1rem;">${{clean[1]}}</p>
-                                <p style="font-size:0.9rem; opacity:0.7; margin-bottom:1rem;">${{clean[2] ? clean[2].substring(0,60)+'...' : ''}}</p>
-                            </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
-                                <a href="product.html?item=${{prodName}}" class="btn" style="background:#e2e8f0; color:var(--primary); padding:0.8rem; font-size:0.8rem;">View Details</a>
-                                <a href="https://wa.me/{wa_num}?text=I am interested in ${{prodName}}" target="_blank" class="btn-primary btn" style="padding:0.8rem; font-size:0.8rem;">WhatsApp</a>
-                            </div>
+                const prodName = encodeURIComponent(clean[0]);
+                box.innerHTML += `
+                <div class="card reveal">
+                    <img src="${{img}}" class="prod-img" onerror="this.onerror=null;this.src='{custom_feat}';">
+                    <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <h3>${{clean[0]}}</h3>
+                            <p style="font-weight:bold; color:var(--s); font-size:1.1rem;">${{clean[1]}}</p>
+                            <p style="font-size:0.9rem; opacity:0.7; margin-bottom:1rem;">${{clean[2] ? clean[2].substring(0,60)+'...' : ''}}</p>
                         </div>
-                    </div>`;
-                }}
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+                            <a href="product.html?item=${{prodName}}" class="btn" style="background:#e2e8f0; color:var(--primary); padding:0.8rem; font-size:0.8rem;">View Details</a>
+                            <a href="https://wa.me/{wa_num}?text=I am interested in ${{prodName}}" target="_blank" class="btn-primary btn" style="padding:0.8rem; font-size:0.8rem;">WhatsApp</a>
+                        </div>
+                    </div>
+                </div>`;
             }}
         }} catch(e) {{ console.log(e); }}
     }}
@@ -516,101 +497,41 @@ def gen_inventory_js(is_demo=False):
 
 def gen_inventory():
     if not show_inventory: return ""
-    return f"""
-    <section id="inventory" style="background:rgba(0,0,0,0.02)"><div class="container">
-        <div class="section-head reveal"><h2>Live Inventory</h2><p>Real-time availability directly from our warehouse.</p></div>
-        <div id="inv-grid" class="grid-3"><div style="grid-column:1/-1; text-align:center; padding:4rem; color:var(--s);">Loading Database...</div></div>
-    </div></section>
-    {gen_inventory_js(is_demo=False)}
-    """
+    return f"""<section id="inventory" style="background:rgba(0,0,0,0.02)"><div class="container"><div class="section-head reveal"><h2>Live Inventory</h2><p>Real-time availability.</p></div><div id="inv-grid" class="grid-3"><div style="grid-column:1/-1; text-align:center; padding:4rem;">Loading...</div></div></div></section>{gen_inventory_js(is_demo=False)}"""
 
 def gen_footer():
     icons = ""
     if fb_link: icons += f'<a href="{fb_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>'
-    if ig_link: icons += f'<a href="{ig_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zM7.17 2.1c-1.4 0-2.6.48-3.46 1.33c-.85.85-1.33 2.06-1.33 3.46v10.3c0 1.3.47 2.5 1.33 3.36c.86.85 2.06 1.33 3.46 1.33h9.66c1.4 0 2.6-.48 3.46-1.33c.85-.85 1.33-2.06 1.33-3.46V6.89c0-1.4-.47-2.6-1.33-3.46c-.86-.85-2.06-1.33-3.46-1.33H7.17zm11.97 3.33c.77 0 1.4.63 1.4 1.4c0 .77-.63 1.4-1.4 1.4c-.77 0-1.4-.63-1.4-1.4c0-.77.63-1.4 1.4-1.4zM12 5.76c3.39 0 6.14 2.75 6.14 6.14c0 3.39-2.75 6.14-6.14 6.14c-3.39 0-6.14-2.75-6.14-6.14c0-3.39 2.75-6.14 6.14-6.14zm0 2.1c-2.2 0-3.99 1.79-3.99 4.04c0 2.25 1.79 4.04 3.99 4.04c2.2 0 3.99-1.79 3.99-4.04c0-2.25-1.79-4.04-3.99-4.04z"/></svg></a>'
+    if ig_link: icons += f'<a href="{ig_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zM7.17 2.1c-1.4 0-2.6.48-3.46 1.33c-.85.85-1.33 2.06-1.33 3.46v10.3c0 1.3.47 2.5 1.33 3.36c.86.85 2.06 1.33 3.46 1.33h9.66c1.4 0 2.6-.48 3.46-1.33c.85-.85 1.33-2.06 1.33-3.46V6.89c0-1.4-.47-2.6-1.33-3.46c-.86-.85-2.06-1.33-3.46-1.33H7.17zm11.97 3.33c.77 0 1.4.63 1.4 1.4c0 .77-.63 1.4-1.4 1.4c-.77 0-1.4-.63-1.4-1.4c0-.77.63-1.4 1.4-1.4zM12 5.76c3.39 0 6.14 2.75 6.14 6.14c0 3.39-2.75 6.14-6.14 6.14c-3.39 0-6.14-2.75-6.14-6.14c0-3.39 2.75-6.14 6.14-6.14zm0 2.1c-2.2 0-3.99 1.79-3.99 4.04c0 2.25 1.79 4.04 3.99 4.04c2.2 0 3.99-1.79 3.99-4.04c0-2.25-1.79-4.04-3.99-4.04c0-2.25-1.79-4.04-3.99-4.04c0-2.25-1.79-4.04-3.99-4.04z"/></svg></a>'
     if x_link: icons += f'<a href="{x_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></a>'
     if li_link: icons += f'<a href="{li_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2a2 2 0 0 1 2-2z"></path></svg></a>'
     if yt_link: icons += f'<a href="{yt_link}" target="_blank"><svg class="social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>'
 
     return f"""
-    <footer><div class="container">
-        <div class="footer-grid">
-            <div>
-                <h3 style="color:white; margin-bottom:1.5rem;">{biz_name}</h3>
-                <p style="opacity:0.8; font-size:0.9rem;">{biz_addr}</p>
-                <p style="opacity:0.8; font-size:0.9rem; margin-top:1rem;">{biz_email}</p>
-                <div style="margin-top:1.5rem; display:flex; gap:1.2rem; align-items:center;">{icons}</div>
-            </div>
-            <div>
-                <h4 style="color:white; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5rem;">Explore</h4>
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div>
-                <h4 style="color:white; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5rem;">Legal</h4>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-            </div>
-        </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.1); margin-top:3rem; padding-top:2rem; text-align:center; opacity:0.4; font-size:0.8rem;">
-            &copy; <a href="https://www.kaydiemscriptlab.com/" target="_blank" style="display:inline; color:white;">Kaydiem Script Lab</a>. Powered by Titan Engine.
-        </div>
-    </div></footer>
+    <footer><div class="container"><div class="footer-grid">
+        <div><h3 style="color:white; margin-bottom:1.5rem;">{biz_name}</h3><p style="opacity:0.8; font-size:0.9rem;">{biz_addr}</p><div style="margin-top:1.5rem;">{icons}</div></div>
+        <div><h4 style="color:white; margin-bottom:1.5rem;">Explore</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+        <div><h4 style="color:white; margin-bottom:1.5rem;">Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+    </div><div style="text-align:center; opacity:0.4; margin-top:3rem;">&copy; {biz_name}.</div></div></footer>
     """
 
 def build_page(title, content, extra_js=""):
     css = get_theme_css()
-    # RESTORED KEYWORDS TAG
+    # RESTORED: Meta Keywords
     meta_tags = f'<meta name="description" content="{seo_d}">\n<meta name="keywords" content="{seo_keywords}">'
     if gsc_tag: meta_tags += f'\n<meta name="google-site-verification" content="{gsc_tag}">'
-    if og_image: meta_tags += f'\n<meta property="og:image" content="{og_image}">'
     
-    analytics = f"<script async src='https://www.googletagmanager.com/gtag/js?id={ga_tag}'></script><script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{ga_tag}');</script>" if ga_tag else ""
-
     return f"""
     <!DOCTYPE html>
     <html lang="en">
-    <head>
-        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{title} | {biz_name}</title>
-        {meta_tags}
-        {gen_schema()}
-        <link href="https://fonts.googleapis.com/css2?family={h_font.replace(' ', '+')}:wght@400;700;900&family={b_font.replace(' ', '+')}:wght@300;400;600&display=swap" rel="stylesheet">
-        <style>{css}</style>
-        {analytics}
-    </head>
-    <body>
-        {gen_nav()}
-        {content}
-        {gen_footer()}
-        {extra_js}
-        <script>
-        window.addEventListener('scroll', () => {{
-            var reveals = document.querySelectorAll('.reveal');
-            for (var i = 0; i < reveals.length; i++) {{
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 150) {{ reveals[i].classList.add('active'); }}
-            }}
-        }});
-        window.dispatchEvent(new Event('scroll'));
-        </script>
-    </body>
-    </html>
+    <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} | {biz_name}</title>{meta_tags}{gen_schema()}<link href="https://fonts.googleapis.com/css2?family={h_font.replace(' ','+')}:wght@700&family={b_font.replace(' ','+')}:wght@400;600&display=swap" rel="stylesheet"><style>{css}</style></head>
+    <body>{gen_nav()}{content}{gen_footer()}{gen_wa_widget()}{gen_scripts()}{extra_js}</body></html>
     """
 
 def gen_product_page_content(is_demo=False):
     demo_flag = "const isDemo = true;" if is_demo else "const isDemo = false;"
     return f"""
-    <section style="padding-top:150px;">
-        <div class="container">
-            <div id="product-detail" class="detail-view">
-                <div style="background:#eee; height:400px; border-radius:12px; display:flex; align-items:center; justify-content:center;">Loading Product...</div>
-                <div>Loading Details...</div>
-            </div>
-        </div>
-    </section>
+    <section style="padding-top:150px;"><div class="container"><div id="product-detail" class="detail-view"><div style="background:#eee; height:400px;">Loading...</div></div></div></section>
     {gen_csv_parser()}
     <script>
     function shareFB(url) {{ window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank'); }}
@@ -618,7 +539,6 @@ def gen_product_page_content(is_demo=False):
     function shareX(url, title) {{ window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), '_blank'); }}
     function shareLI(url) {{ window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank'); }}
     function copyLink(url) {{ navigator.clipboard.writeText(url); alert('Link copied!'); }}
-
     {demo_flag}
     async function loadProduct() {{
         const params = new URLSearchParams(window.location.search);
@@ -627,18 +547,17 @@ def gen_product_page_content(is_demo=False):
         try {{
             const res = await fetch('{sheet_url}');
             const txt = await res.text();
-            const lines = txt.split(/\\r\\n|\\n/);
+            const rows = parseGlobalCSV(txt);
             let found = false;
-            for(let i=1; i<lines.length; i++) {{
-                const clean = parseCSVLine(lines[i]);
+            for(let i=1; i<rows.length; i++) {{
+                const clean = rows[i];
                 if(clean.length < 2) continue;
                 if(isDemo) {{ targetName = clean[0]; }}
                 if(clean[0] === targetName) {{
                     found = true;
                     let img = clean[3] && clean[3].length > 5 ? clean[3] : '{custom_feat}'; 
-                    if(clean[6] && clean[6].length > 5) img = clean[6];
                     document.getElementById('product-detail').innerHTML = `
-                        <img src="${{img}}" onerror="this.onerror=null;this.src='{custom_feat}';" style="width:100%; height:auto; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="${{img}}" onerror="this.onerror=null;this.src='{custom_feat}';" style="width:100%; height:auto; border-radius:12px;">
                         <div>
                             <h1 style="font-size:3rem; line-height:1.1;">${{clean[0]}}</h1>
                             <p style="font-size:1.5rem; color:var(--s); font-weight:bold; margin-bottom:1.5rem;">${{clean[1]}}</p>
@@ -686,12 +605,13 @@ st.subheader("🚀 Launchpad")
 preview_mode = st.radio("Preview Page:", ["Home", "About", "Contact", "Privacy", "Terms", "Product Detail (Demo)"], horizontal=True)
 
 def gen_inner_header(title):
-    return f'<section class="hero" style="min-height: 40vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(\'{hero_img_1}\'); background-size: cover; background-position: center;"><div class="container"><h1 style="font-size: 3.5rem; margin-bottom: 0;">{title}</h1></div></section>'
+    # FIX: Added background-color fallback and improved styles
+    return f'<section class="hero" style="min-height: 40vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(\'{hero_img_1}\'); background-size: cover; background-position: center; background-color: var(--p);"><div class="container"><h1 style="font-size: 3.5rem; margin-bottom: 0;">{title}</h1></div></section>'
 
 # ABOUT
 about_content = f'{gen_inner_header("About Us")}<section><div class="container"><div class="about-grid"><div class="legal-text">{format_text(about_long)}</div><img src="{about_img}" style="width:100%; border-radius:12px;"></div></div></section>'
 
-# CONTACT (FIXED MOBILE GRID)
+# CONTACT (RESTORED: Mobile Grid Fix via .contact-grid)
 contact_content = f"""
 {gen_inner_header("Contact Us")}
 <section>
