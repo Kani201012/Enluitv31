@@ -7,7 +7,7 @@ import re
 
 # --- 1. APP CONFIGURATION ---
 st.set_page_config(
-    page_title="Titan v30.6 | StopWebRent Edition", 
+    page_title="Titan v31.5 | Social Edition", 
     layout="wide", 
     page_icon="⚡",
     initial_sidebar_state="expanded"
@@ -59,7 +59,7 @@ st.markdown("""
 # --- 3. SIDEBAR: THE CONTROL CENTER ---
 with st.sidebar:
     st.title("Titan Architect")
-    st.caption("v30.6 | Mobile Logic Fixed")
+    st.caption("v31.5 | Social Sharing Added")
     st.divider()
     
     # 3.1 VISUAL DNA
@@ -75,8 +75,8 @@ with st.sidebar:
             "Stark Minimalist"
         ])
         c1, c2 = st.columns(2)
-        p_color = c1.color_picker("Primary Brand", "#0F172A") # Defaulted to Titan Navy
-        s_color = c2.color_picker("Action (CTA)", "#EF4444")  # Defaulted to Urgent Red
+        p_color = c1.color_picker("Primary Brand", "#0F172A") 
+        s_color = c2.color_picker("Action (CTA)", "#EF4444")  
         
         st.markdown("**Typography**")
         h_font = st.selectbox("Headings", ["Montserrat", "Space Grotesk", "Playfair Display", "Oswald", "Clash Display"])
@@ -94,6 +94,7 @@ with st.sidebar:
         show_features = st.checkbox("Feature Grid (4 Pillars)", value=True)
         show_pricing = st.checkbox("Pricing Comparison Table", value=True)
         show_inventory = st.checkbox("Portfolio/Inventory (CSV)", value=True)
+        show_blog = st.checkbox("Blog / News Engine", value=True)
         show_gallery = st.checkbox("About Section", value=True)
         show_testimonials = st.checkbox("Testimonials", value=True)
         show_faq = st.checkbox("F.A.Q.", value=True)
@@ -113,7 +114,7 @@ with st.sidebar:
 # --- 4. MAIN WORKSPACE ---
 st.title("🏗️ StopWebRent Site Builder")
 
-tabs = st.tabs(["1. Identity", "2. Content Blocks", "3. Pricing Logic", "4. Inventory/Portfolio", "5. Legal & Footer"])
+tabs = st.tabs(["1. Identity", "2. Content Blocks", "3. Pricing Logic", "4. Inventory/Portfolio", "5. Blog Engine", "6. Legal & Footer"])
 
 with tabs[0]:
     c1, c2 = st.columns(2)
@@ -182,7 +183,6 @@ with tabs[1]:
     about_short = c_a1.text_area("Home Page Summary (Short)", "No WordPress dashboard. No plugins to update. Just open your private Google Sheet, change a text, and watch your site update globally in seconds.", height=200)
     about_long = c_a2.text_area("Full About Page Content (Long)", "**The Digital Landlord Trap**\nMost business owners don't realize they are trapped in a rental cycle. Platforms like Wix, Squarespace, and Shopify act as Digital Landlords. They charge you rent every single month to keep your business online. If you stop paying, they delete your website. Over 5 years, a cheap $29/mo website actually drains over $1,700 from your pocket.\n\n**The Titan Philosophy: Ownership**\nAt StopWebRent.com, we believe you should own your digital home, not rent it. We reject bloatware, heavy databases, and recurring subscription models. Our mission is to democratize Enterprise Grade technology for small business owners.\n\n**How We Achieve $0 Monthly Fees**\nWe utilize Static Site Architecture. Unlike traditional sites that require a heavy server running 24/7 (costing money), Titan sites are pre-built and live on the Global Edge (CDN).", height=200)
 
-# --- NEW TAB: PRICING LOGIC ---
 with tabs[2]:
     st.subheader("💰 Pricing Comparison Table")
     st.info("This configures the table that compares you vs. Wix/Shopify.")
@@ -205,7 +205,28 @@ with tabs[3]:
     custom_feat = st.text_input("Default Product Image URL (Fallback)", "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800")
     st.caption("Required Columns: Name, Price, Description, ImageURL")
 
+# --- NEW TAB: BLOG ENGINE ---
 with tabs[4]:
+    st.subheader("📰 Titan Blog Engine")
+    st.info("Connect a Google Sheet to power your blog. Zero database required.")
+    
+    blog_sheet_url = st.text_input("Blog CSV Link", placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv", help="Publish your sheet as CSV")
+    
+    st.markdown("""
+    **Required CSV Columns:**
+    1. `Slug` (e.g., my-first-post)
+    2. `Title` (e.g., Why we are the best)
+    3. `Date` (e.g., Oct 20, 2026)
+    4. `Category` (e.g., Tech)
+    5. `Summary` (Short intro for the grid)
+    6. `ImageURL` (Main featured image)
+    7. `Content` (Full text. Supports **Bold** and * Bullets)
+    """)
+    
+    blog_hero_title = st.text_input("Blog Page Title", "Latest Insights")
+    blog_hero_sub = st.text_input("Blog Page Subtext", "Thoughts on technology, business, and freedom.")
+
+with tabs[5]:
     st.subheader("Trust & Legal")
     st.info("💡 Use `**Title**` for bold headers.")
     testi_data = st.text_area("Testimonials (Name | Quote)", "Rajesh Gupta, HVAC Business Owner | I was paying Wix $35/month for 3 years. Titan built me a faster site for a one-time fee. I stopped the bleeding and finally own my asset.\nSarah Jenkins, Cafe Owner | Updating my menu used to be a nightmare on WordPress. Now, I just open a Google Sheet on my phone, change the price, and it updates the website instantly.\nDavid Miller, Financial Consultant | Speed is everything for SEO. My old site took 4 seconds to load. My new Titan site loads in 0.1 seconds. My Google ranking jumped to Page 1 within a month.", height=100)
@@ -380,6 +401,23 @@ def get_theme_css():
     /* Detail View */
     .detail-view {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }}
     
+    /* BLOG STYLES */
+    .blog-badge {{ background: var(--s); color: white; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; width: fit-content; margin-bottom: 1rem; display:inline-block; }}
+    .article-content ul {{ padding-left: 1.5rem; margin-bottom: 1.5rem; }}
+    .article-content li {{ margin-bottom: 0.5rem; }}
+    .article-content p {{ margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.9; line-height: 1.8; }}
+    
+    /* SOCIAL SHARE BAR STYLES (NEW) */
+    .share-row {{ display: flex; gap: 0.8rem; margin-top: 2rem; align-items: center; flex-wrap: wrap; }}
+    .share-label {{ font-weight: bold; margin-right: 0.5rem; font-size: 0.9rem; opacity: 0.8; }}
+    .share-btn {{ width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; transition: 0.3s; border: none; cursor: pointer; text-decoration: none; }}
+    .share-btn:hover {{ transform: translateY(-3px); filter: brightness(1.1); }}
+    .share-btn svg {{ width: 18px; height: 18px; fill: white; }}
+    .bg-fb {{ background: #1877F2; }}
+    .bg-x {{ background: #000000; }}
+    .bg-li {{ background: #0A66C2; }}
+    .bg-link {{ background: #64748b; }}
+    
     {anim_css}
     
     /* MOBILE OPTIMIZATIONS */
@@ -407,6 +445,8 @@ def get_theme_css():
 
 def gen_nav():
     logo_display = f'<img src="{logo_url}" height="40" alt="{biz_name} Logo">' if logo_url else f'<span style="font-weight:900; font-size:1.5rem; color:var(--p)">{biz_name}</span>'
+    blog_link = '<a href="blog.html" onclick="document.querySelector(\'.nav-links\').classList.remove(\'active\')">Blog</a>' if show_blog else ''
+    
     return f"""
     <nav><div class="container nav-flex">
         <a href="index.html" style="text-decoration:none">{logo_display}</a>
@@ -416,6 +456,7 @@ def gen_nav():
             {'<a href="index.html#features" onclick="document.querySelector(\'.nav-links\').classList.remove(\'active\')">Features</a>' if show_features else ''}
             {'<a href="index.html#pricing" onclick="document.querySelector(\'.nav-links\').classList.remove(\'active\')">Savings</a>' if show_pricing else ''}
             {'<a href="index.html#inventory" onclick="document.querySelector(\'.nav-links\').classList.remove(\'active\')">Portfolio</a>' if show_inventory else ''}
+            {blog_link}
             <a href="about.html" onclick="document.querySelector('.nav-links').classList.remove('active')">About</a>
             <a href="contact.html" onclick="document.querySelector('.nav-links').classList.remove('active')">Contact</a>
             <a href="tel:{biz_phone}" class="btn-accent" style="padding:0.6rem 1.5rem; margin-left:1.5rem; margin-bottom:0; border-radius:50px; color:white !important;">Call Now</a>
@@ -546,6 +587,33 @@ def gen_csv_parser():
         res.push(cur.trim());
         return res;
     }
+    // Markdown Parser
+    function parseMarkdown(text) {
+        if (!text) return '';
+        let html = text
+            .replace(/\\r\\n/g, '\\n')
+            .replace(/\\n/g, '<br>')
+            .replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')
+            .replace(/\\*(.*?)\\*/g, '<em>$1</em>');
+        
+        if (html.includes('* ')) {
+            const lines = html.split('<br>');
+            let inList = false;
+            let finalHtml = '';
+            lines.forEach(line => {
+                if (line.trim().startsWith('* ')) {
+                    if (!inList) { finalHtml += '<ul>'; inList = true; }
+                    finalHtml += '<li>' + line.trim().substring(2) + '</li>';
+                } else {
+                    if (inList) { finalHtml += '</ul>'; inList = false; }
+                    finalHtml += line + '<br>';
+                }
+            });
+            if (inList) finalHtml += '</ul>';
+            return finalHtml;
+        }
+        return html;
+    }
     </script>
     """
 
@@ -654,6 +722,7 @@ def gen_footer():
             <div>
                 <h4 style="color:white; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5rem;">Explore</h4>
                 <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
                 <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
             </div>
@@ -727,6 +796,7 @@ def build_page(title, content, extra_js=""):
 def gen_404_content():
     return f"""<section class="hero" style="min-height:70vh;"><div class="container"><h1 style="font-size:6rem; margin:0;">404</h1><p>Page Not Found</p><br><a href="index.html" class="btn btn-accent">Return Home</a></div></section>"""
 
+# --- MODIFIED: gen_product_page_content with Social Shares ---
 def gen_product_page_content(is_demo=False):
     demo_flag = "const isDemo = true;" if is_demo else "const isDemo = false;"
     return f"""
@@ -750,6 +820,9 @@ def gen_product_page_content(is_demo=False):
                 if(isDemo) targetName = clean[0];
                 if(clean[0] === targetName) {{
                     let img = clean[3] || '{custom_feat}';
+                    const shareUrl = encodeURIComponent(window.location.href);
+                    const shareTitle = encodeURIComponent(clean[0]);
+                    
                     document.getElementById('product-detail').innerHTML = `
                         <img src="${{img}}" style="width:100%; border-radius:12px;">
                         <div>
@@ -757,6 +830,15 @@ def gen_product_page_content(is_demo=False):
                             <p style="font-size:1.5rem; color:var(--s); font-weight:bold; margin-bottom:1.5rem;">${{clean[1]}}</p>
                             <p>${{clean[2]}}</p>
                             <button onclick="shareWA(window.location.href, '${{clean[0]}}')" class="btn btn-primary" style="width:100%; margin-top:2rem;">Share on WhatsApp</button>
+                            
+                            <!-- SOCIAL SHARE ROW -->
+                            <div class="share-row">
+                                <span class="share-label">Share This:</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=${{shareUrl}}" target="_blank" class="share-btn bg-fb"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                                <a href="https://twitter.com/intent/tweet?url=${{shareUrl}}&text=${{shareTitle}}" target="_blank" class="share-btn bg-x"><svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=${{shareUrl}}" target="_blank" class="share-btn bg-li"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2a2 2 0 0 1 2-2z"></path></svg></a>
+                                <button onclick="navigator.clipboard.writeText(window.location.href);alert('Link Copied!')" class="share-btn bg-link" title="Copy Link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></button>
+                            </div>
                         </div>
                     `;
                     break;
@@ -765,6 +847,123 @@ def gen_product_page_content(is_demo=False):
         }} catch(e) {{}}
     }}
     loadProduct();
+    </script>
+    """
+
+# --- BLOG GENERATION LOGIC ---
+def gen_blog_index_html():
+    return f"""
+    <section class="hero" style="min-height:40vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{hero_img_1}'); background-size: cover; background-position: center;">
+        <div class="container"><h1>{blog_hero_title}</h1><p>{blog_hero_sub}</p></div>
+    </section>
+    <section>
+        <div class="container">
+            <div id="blog-grid" class="grid-3">
+                <div style="text-align:center; grid-column:1/-1;">Loading Articles...</div>
+            </div>
+        </div>
+    </section>
+    {gen_csv_parser()}
+    <script>
+    async function loadBlog() {{
+        try {{
+            const res = await fetch('{blog_sheet_url}');
+            const txt = await res.text();
+            const lines = txt.split(/\\r\\n|\\n/);
+            const box = document.getElementById('blog-grid');
+            if(!box) return;
+            box.innerHTML = '';
+            for(let i=1; i<lines.length; i++) {{
+                if(!lines[i].trim()) continue;
+                const r = parseCSVLine(lines[i]);
+                if(r.length > 4) {{
+                    box.innerHTML += `
+                    <div class="card reveal">
+                        <img src="${{r[5] || '{hero_img_1}'}}" class="prod-img" alt="${{r[1]}}">
+                        <div>
+                            <span class="blog-badge">${{r[3]}}</span>
+                            <span style="float:right; font-size:0.8rem; opacity:0.7;">${{r[2]}}</span>
+                            <h3 style="margin-top:0.5rem; color:var(--p);"><a href="post.html?id=${{r[0]}}" style="text-decoration:none; color:inherit;">${{r[1]}}</a></h3>
+                            <p style="font-size:0.95rem; opacity:0.8;">${{r[4]}}</p>
+                            <a href="post.html?id=${{r[0]}}" style="color:var(--s); font-weight:bold; text-decoration:none;">Read Article &rarr;</a>
+                        </div>
+                    </div>`;
+                }}
+            }}
+        }} catch(e) {{ console.log(e); }}
+    }}
+    window.addEventListener('load', loadBlog);
+    </script>
+    """
+
+# --- MODIFIED: gen_blog_post_html with Social Shares ---
+def gen_blog_post_html():
+    return f"""
+    <div id="post-container" style="padding-top:100px; min-height:60vh;">
+        <div class="container" style="text-align:center; padding:5rem 0;">
+            <h1>Loading Article...</h1>
+        </div>
+    </div>
+    
+    {gen_csv_parser()}
+    <script>
+    async function loadPost() {{
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('id');
+        if(!slug) {{ window.location.href = 'blog.html'; return; }}
+        
+        try {{
+            const res = await fetch('{blog_sheet_url}');
+            const txt = await res.text();
+            const lines = txt.split(/\\r\\n|\\n/);
+            const container = document.getElementById('post-container');
+            
+            let found = false;
+            for(let i=1; i<lines.length; i++) {{
+                const r = parseCSVLine(lines[i]);
+                if(r[0] === slug) {{
+                    found = true;
+                    document.title = r[1] + " | {biz_name}";
+                    const contentHtml = parseMarkdown(r[6]);
+                    
+                    const shareUrl = encodeURIComponent(window.location.href);
+                    const shareTitle = encodeURIComponent(r[1]);
+                    
+                    container.innerHTML = `
+                        <div style="background:var(--p); padding:6rem 0 4rem 0; color:white; text-align:center;">
+                            <div class="container">
+                                <span class="blog-badge" style="background:rgba(255,255,255,0.2); margin-bottom:1rem; display:inline-block;">${{r[3]}}</span>
+                                <h1 style="font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:1rem; color:white;">${{r[1]}}</h1>
+                                <p style="opacity:0.8;">Published on ${{r[2]}}</p>
+                            </div>
+                        </div>
+                        <div class="container" style="max-width:800px; padding:4rem 1rem;">
+                            <img src="${{r[5]}}" style="width:100%; border-radius:12px; margin-bottom:3rem; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                            <div class="article-content" style="line-height:1.8; color:var(--txt);">
+                                ${{contentHtml}}
+                            </div>
+                            
+                            <!-- SOCIAL SHARE ROW -->
+                            <div class="share-row" style="margin-top:3rem; border-top:1px solid #eee; padding-top:2rem;">
+                                <span class="share-label">Share Article:</span>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=${{shareUrl}}" target="_blank" class="share-btn bg-fb"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                                <a href="https://twitter.com/intent/tweet?url=${{shareUrl}}&text=${{shareTitle}}" target="_blank" class="share-btn bg-x"><svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=${{shareUrl}}" target="_blank" class="share-btn bg-li"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2a2 2 0 0 1 2-2z"></path></svg></a>
+                                <button onclick="navigator.clipboard.writeText(window.location.href);alert('Link Copied!')" class="share-btn bg-link" title="Copy Link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></button>
+                            </div>
+
+                            <hr style="margin:2rem 0; border:0; border-top:1px solid #eee;">
+                            <a href="blog.html" class="btn btn-primary">&larr; Back to Blog</a>
+                        </div>
+                    `;
+                    break;
+                }}
+            }}
+            if(!found) container.innerHTML = '<div class="container" style="text-align:center; padding:5rem;"><h2>Article Not Found</h2><a href="blog.html" class="btn btn-primary">Back</a></div>';
+            
+        }} catch(e) {{ console.log(e); }}
+    }}
+    window.addEventListener('load', loadPost);
     </script>
     """
 
@@ -786,7 +985,7 @@ if show_cta: home_content += f'<section style="background:var(--s); color:white;
 st.divider()
 st.subheader("🚀 Launchpad")
 
-preview_mode = st.radio("Preview Page:", ["Home", "About", "Contact", "Privacy", "Terms", "Product Detail (Demo)"], horizontal=True)
+preview_mode = st.radio("Preview Page:", ["Home", "About", "Contact", "Blog Index", "Blog Post (Demo)", "Privacy", "Terms", "Product Detail (Demo)"], horizontal=True)
 
 # HELPER: Function to generate a header for inner pages with the image
 def gen_inner_header(title):
@@ -852,6 +1051,8 @@ with c1:
     elif preview_mode == "Contact": st.components.v1.html(build_page("Contact", contact_content), height=600, scrolling=True)
     elif preview_mode == "Privacy": st.components.v1.html(build_page("Privacy", privacy_content), height=600, scrolling=True)
     elif preview_mode == "Terms": st.components.v1.html(build_page("Terms", terms_content), height=600, scrolling=True)
+    elif preview_mode == "Blog Index": st.components.v1.html(build_page("Blog", gen_blog_index_html()), height=600, scrolling=True)
+    elif preview_mode == "Blog Post (Demo)": st.components.v1.html(build_page("Article", gen_blog_post_html()), height=600, scrolling=True)
     elif preview_mode == "Product Detail (Demo)":
         st.info("ℹ️ Demo Mode Active: Showing the first available product from your CSV.")
         st.components.v1.html(build_page("Product Name", gen_product_page_content(is_demo=True)), height=600, scrolling=True)
@@ -867,11 +1068,17 @@ with c2:
             zf.writestr("privacy.html", build_page("Privacy Policy", privacy_content))
             zf.writestr("terms.html", build_page("Terms of Service", terms_content))
             zf.writestr("product.html", build_page("Product Details", gen_product_page_content(is_demo=False)))
+            
+            if show_blog:
+                zf.writestr("blog.html", build_page("Blog", gen_blog_index_html()))
+                zf.writestr("post.html", build_page("Article", gen_blog_post_html()))
+
             zf.writestr("404.html", build_page("404 Not Found", gen_404_content()))
             zf.writestr("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {prod_url}/sitemap.xml")
             
             import datetime
             date_str = datetime.date.today().isoformat()
+            
             sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url><loc>{prod_url}/</loc><lastmod>{date_str}</lastmod></url>
@@ -880,6 +1087,7 @@ with c2:
    <url><loc>{prod_url}/contact.html</loc><lastmod>{date_str}</lastmod></url>
    <url><loc>{prod_url}/privacy.html</loc><lastmod>{date_str}</lastmod></url>
    <url><loc>{prod_url}/terms.html</loc><lastmod>{date_str}</lastmod></url>
+   <url><loc>{prod_url}/blog.html</loc><lastmod>{date_str}</lastmod></url>
 </urlset>"""
             zf.writestr("sitemap.xml", sitemap_xml)
             
